@@ -1,0 +1,23 @@
+0 verbose cli /opt/homebrew/Cellar/node/26.0.0/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v26.0.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/.npmrc
+5 silly config load:file:/Users/zhoukeyu/.npmrc
+6 silly config load:file:/Users/zhoukeyu/.npm-global/etc/npmrc
+7 verbose title npm exec playwright-cli snapshot
+8 verbose argv "exec" "--yes" "--package" "@playwright/cli" "--" "playwright-cli" "snapshot"
+9 verbose logfile logs-max:10 dir:/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/.npm-cache/_logs/2026-06-23T01_37_45_796Z-
+10 verbose logfile /Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/.npm-cache/_logs/2026-06-23T01_37_45_796Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4395630592 maxSize:1098907648 maxEntrySize:549453824
+13 silly logfile done cleaning log files
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+15 http fetch GET 200 https://registry.npmmirror.com/@playwright%2fcli 59ms (cache revalidated)
+16 silly packumentCache heap:4395630592 maxSize:1098907648 maxEntrySize:549453824
+17 verbose cwd /Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2
+18 verbose os Darwin 25.3.0
+19 verbose node v26.0.0
+20 verbose npm  v11.12.1
+21 verbose exit 0
+22 info ok
