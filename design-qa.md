@@ -24,7 +24,7 @@ additional implementation evidence:
 - 陪练录音流程：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session.png`
 - 陪练重录态：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-recorded.png`
 - 陪练建议：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-report.png`
-- 陪练进行页按原版原型对齐后：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session-original-aligned.png`
+- 陪练进行页正式任务流版：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session-original-aligned.png`
 - 陪练语音识别态：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session-after-speech.png`
 - 陪练发送后对话流：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session-sent.png`
 - 陪练结束确认弹层：`/Users/zhoukeyu/Desktop/内训师V1.2 - 内部/prototypes/enterprise-lm-mobile-v2/output/playwright/practice-session-exit-sheet.png`
@@ -61,7 +61,7 @@ focused region comparison evidence: not separated; the full-view comparison is r
 - Added a complete lightweight `陪练` flow: scenario list, full-screen recording session, unlimited re-record state, and suggestion report. Practice entry does not show a score by default.
 - Added a complete lightweight `考试` flow: exam list, countdown taking page, single-choice question, `演讲题` recording, re-record state, and configurable result page. The taking page does not show score.
 - Hidden bottom navigation during active recording and exam-taking flows to avoid accidental navigation while answering.
-- Reworked the `陪练` active session after checking the original prototype: it now follows the original continuous AI conversation model with face/expression recognition context, progress, AI question bubbles, speech-recognition preview, `按住说话`, speaking feedback, and end-confirmation sheet instead of static per-round recording cards.
+- Reworked the `陪练` active session into a continuous task flow with face/expression recognition context, progress, AI question bubbles, speech-recognition preview, `按住说话`, speaking feedback, and an end-confirmation sheet instead of static per-round recording cards.
 
 **Follow-up Polish**
 
@@ -72,7 +72,7 @@ final result: passed
 
 ## 2026-06-23 Practice And Exam Alignment Pass
 
-scope: 参考原移动端原型，对 `陪练` 和 `考试` 正式流程做第二轮对齐，重点检查正式任务流的沉浸感、底部导航干扰、考试验证页、以及单选题切到 `演讲题` 时的对话状态连续性。
+scope: 围绕当前确认的移动端任务流，对 `陪练` 和 `考试` 正式流程做第二轮梳理，重点检查正式任务流的沉浸感、底部导航干扰、考试验证页、以及单选题切到 `演讲题` 时的对话状态连续性。
 
 evidence:
 

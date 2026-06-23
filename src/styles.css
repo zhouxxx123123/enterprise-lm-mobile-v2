@@ -2043,7 +2043,7 @@ h2 {
   background: #0d766e;
 }
 
-.screen-practice-session .trainer-session-page {
+.screen-practice-session .session-flow-page {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -2053,7 +2053,7 @@ h2 {
     #f7f9f9;
 }
 
-.trainer-header {
+.session-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2062,19 +2062,19 @@ h2 {
   margin-bottom: 12px;
 }
 
-.trainer-header .plain-icon {
+.session-header .plain-icon {
   flex: 0 0 36px;
   width: 36px;
   height: 36px;
 }
 
-.trainer-header div {
+.session-header div {
   flex: 1;
   min-width: 0;
   text-align: center;
 }
 
-.trainer-header h1 {
+.session-header h1 {
   overflow: hidden;
   font-size: 17px;
   line-height: 1.25;
@@ -2082,14 +2082,14 @@ h2 {
   text-overflow: ellipsis;
 }
 
-.trainer-header span {
+.session-header span {
   display: block;
   margin-top: 3px;
   color: #74808a;
   font-size: 11px;
 }
 
-.trainer-top {
+.session-top {
   display: grid;
   grid-template-columns: 126px 1fr;
   gap: 12px;
@@ -2160,7 +2160,7 @@ h2 {
   font-weight: 700;
 }
 
-.trainer-progress {
+.session-progress {
   display: grid;
   align-content: center;
   gap: 10px;
@@ -2171,23 +2171,23 @@ h2 {
   background: #fff;
 }
 
-.trainer-progress div:first-child {
+.session-progress div:first-child {
   display: grid;
   gap: 4px;
 }
 
-.trainer-progress strong {
+.session-progress strong {
   font-size: 14px;
 }
 
-.trainer-progress span,
-.trainer-progress em {
+.session-progress span,
+.session-progress em {
   color: #6d7780;
   font-size: 11px;
   font-style: normal;
 }
 
-.trainer-chat-list {
+.session-chat-list {
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
@@ -2198,11 +2198,11 @@ h2 {
   scrollbar-width: none;
 }
 
-.trainer-chat-list::-webkit-scrollbar {
+.session-chat-list::-webkit-scrollbar {
   display: none;
 }
 
-.trainer-bubble {
+.session-bubble {
   display: grid;
   gap: 5px;
   max-width: 86%;
@@ -2212,7 +2212,7 @@ h2 {
   line-height: 1.48;
 }
 
-.trainer-bubble.ai {
+.session-bubble.ai {
   justify-self: start;
   border-bottom-left-radius: 5px;
   color: #18222b;
@@ -2220,19 +2220,19 @@ h2 {
   border: 1px solid #e4eaed;
 }
 
-.trainer-bubble.mine {
+.session-bubble.mine {
   justify-self: end;
   border-bottom-right-radius: 5px;
   color: #fff;
   background: #0d766e;
 }
 
-.trainer-bubble span {
+.session-bubble span {
   color: #0d766e;
   font-weight: 800;
 }
 
-.trainer-tip-card {
+.session-tip-card {
   flex: 0 0 auto;
   margin-bottom: 10px;
   padding: 12px;
@@ -2242,19 +2242,19 @@ h2 {
   box-shadow: 0 14px 34px rgba(17, 24, 39, 0.13);
 }
 
-.trainer-tip-card > div:first-child {
+.session-tip-card > div:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
 
-.trainer-tip-card strong {
+.session-tip-card strong {
   color: #49d0c4;
   font-size: 12px;
 }
 
-.trainer-tip-card button {
+.session-tip-card button {
   flex: 0 0 auto;
   min-width: 58px;
   height: 28px;
@@ -2265,12 +2265,12 @@ h2 {
   font-weight: 700;
 }
 
-.trainer-tip-card .conversation-choice-list {
+.session-tip-card .conversation-choice-list {
   gap: 7px;
   margin-top: 10px;
 }
 
-.trainer-tip-card .conversation-choice-list button {
+.session-tip-card .conversation-choice-list button {
   width: 100%;
   min-height: 38px;
   padding: 0 10px;
@@ -2283,7 +2283,7 @@ h2 {
   font-weight: 650;
 }
 
-.trainer-tip-card .conversation-choice-list button.selected {
+.session-tip-card .conversation-choice-list button.selected {
   border-color: #49d0c4;
   color: #0f2926;
   background: #dff5f1;
@@ -2300,15 +2300,15 @@ h2 {
   font-weight: 760;
 }
 
-.exam-conversation-page .trainer-tip-card {
+.exam-conversation-page .session-tip-card {
   margin-bottom: 0;
 }
 
-.exam-conversation-page .trainer-chat-list {
+.exam-conversation-page .session-chat-list {
   padding-bottom: 10px;
 }
 
-.trainer-tip-card p {
+.session-tip-card p {
   margin-top: 8px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 11px;
@@ -2437,7 +2437,7 @@ h2 {
   background: #b42318;
 }
 
-.trainer-exit-sheet {
+.session-exit-sheet {
   position: absolute;
   left: 0;
   right: 0;
@@ -2449,18 +2449,18 @@ h2 {
   box-shadow: 0 -22px 52px rgba(17, 24, 39, 0.18);
 }
 
-.trainer-exit-sheet > div {
+.session-exit-sheet > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 18px;
 }
 
-.trainer-exit-sheet strong {
+.session-exit-sheet strong {
   font-size: 17px;
 }
 
-.trainer-exit-sheet > div button {
+.session-exit-sheet > div button {
   width: 34px;
   height: 34px;
   display: grid;
@@ -2469,7 +2469,7 @@ h2 {
   background: #eef3f4;
 }
 
-.trainer-exit-sheet .link-action {
+.session-exit-sheet .link-action {
   width: 100%;
   min-height: 44px;
   margin-top: 12px;

@@ -906,8 +906,8 @@ function PracticeSessionScreen({ onBack, onFinish, onToast }) {
   };
 
   return (
-    <div className="page trainer-session-page">
-      <header className="trainer-header">
+    <div className="page session-flow-page">
+      <header className="session-header">
         <button className="plain-icon" onClick={onBack} aria-label="返回">
           <CaretLeft size={30} />
         </button>
@@ -920,12 +920,12 @@ function PracticeSessionScreen({ onBack, onFinish, onToast }) {
         </button>
       </header>
 
-      <section className="trainer-top">
+      <section className="session-top">
         <div className="face-card">
           <div className="face-avatar">林</div>
           <span><ShieldCheck size={14} />表情识别中</span>
         </div>
-        <div className="trainer-progress">
+        <div className="session-progress">
           <div>
             <strong>当前练习</strong>
             <span>需求确认 · 客户预算异议</span>
@@ -937,25 +937,25 @@ function PracticeSessionScreen({ onBack, onFinish, onToast }) {
         </div>
       </section>
 
-      <section className="trainer-chat-list">
-        <div className="trainer-bubble ai">
+      <section className="session-chat-list">
+        <div className="session-bubble ai">
           <span>1.</span>
           <p>客户说：“预算只有 18 万，但又想儿童房更环保，你们 ENF 级为什么值得加钱？”</p>
         </div>
         {hasAnswer && (
-          <div className="trainer-bubble mine">
+          <div className="session-bubble mine">
             <p>我会先确认您更关注孩子长期居住安全，还是整体预算控制，再解释 ENF 的环保释放量要求更严格。</p>
           </div>
         )}
         {sentAnswer && (
-          <div className="trainer-bubble ai">
+          <div className="session-bubble ai">
             <span>2.</span>
             <p>回答方向正确。下一步请尝试把“环保释放量”转成客户更容易理解的生活场景。</p>
           </div>
         )}
       </section>
 
-      <section className="trainer-tip-card">
+      <section className="session-tip-card">
         <div>
           <strong>话术参考：需求确认</strong>
           <button onClick={sendAnswer}>发送</button>
@@ -983,7 +983,7 @@ function PracticeSessionScreen({ onBack, onFinish, onToast }) {
       )}
 
       {exitOpen && (
-        <div className="trainer-exit-sheet">
+        <div className="session-exit-sheet">
           <div>
             <strong>是否结束当前练习？</strong>
             <button onClick={() => setExitOpen(false)}><X size={20} /></button>
@@ -1191,8 +1191,8 @@ function ExamTakingScreen({ onBack, onFinish, onToast }) {
   };
 
   return (
-    <div className="page trainer-session-page exam-conversation-page">
-      <header className="trainer-header">
+    <div className="page session-flow-page exam-conversation-page">
+      <header className="session-header">
         <button className="plain-icon" onClick={onBack} aria-label="返回">
           <CaretLeft size={30} />
         </button>
@@ -1205,12 +1205,12 @@ function ExamTakingScreen({ onBack, onFinish, onToast }) {
         </button>
       </header>
 
-      <section className="trainer-top exam-top">
+      <section className="session-top exam-top">
         <div className="face-card">
           <div className="face-avatar">林</div>
           <span><ShieldCheck size={14} />表情识别中</span>
         </div>
-        <div className="trainer-progress">
+        <div className="session-progress">
           <div>
             <strong>考试进行中</strong>
             <span>{isChoice ? "单选题 · 自动判分" : "演讲题 · 录音作答"}</span>
@@ -1222,31 +1222,31 @@ function ExamTakingScreen({ onBack, onFinish, onToast }) {
         </div>
       </section>
 
-      <section className="trainer-chat-list">
-        <div className="trainer-bubble ai">
+      <section className="session-chat-list">
+        <div className="session-bubble ai">
           <span>{questionIndex + 1}.</span>
           <p>{isChoice ? "客户问“ENF 级为什么更贵”，最适合先回应哪一点？" : "请用 60 秒向客户解释 E0 和 ENF 的区别。"}</p>
         </div>
         {isChoice && selected && (
-          <div className="trainer-bubble mine">
+          <div className="session-bubble mine">
             <p>{selected}</p>
           </div>
         )}
         {choiceSubmitted && isChoice && (
-          <div className="trainer-bubble ai">
+          <div className="session-bubble ai">
             <span>提示</span>
             <p>第 1 题已提交。下一题为演讲题，请按住说话完成录音作答。</p>
           </div>
         )}
         {speechAnswer && !isChoice && (
-          <div className="trainer-bubble mine">
+          <div className="session-bubble mine">
             <p>我会先说明 E0 与 ENF 都和环保释放量相关，再强调 ENF 要求更严格，适合儿童房、老人房等敏感场景。</p>
           </div>
         )}
       </section>
 
       {isChoice ? (
-        <section className="trainer-tip-card exam-answer-card">
+        <section className="session-tip-card exam-answer-card">
           <div>
             <strong>单选题</strong>
             <button onClick={submitChoice}>{choiceSubmitted ? "已提交" : "提交当前题"}</button>
@@ -1265,7 +1265,7 @@ function ExamTakingScreen({ onBack, onFinish, onToast }) {
           <button className="secondary-inline-action" onClick={goNextQuestion}>下一题</button>
         </section>
       ) : (
-        <section className="trainer-tip-card">
+        <section className="session-tip-card">
           <div>
             <strong>演讲题作答</strong>
             <button onClick={() => speechAnswer ? onFinish() : onToast("请先按住说话完成录音")}>交卷</button>
@@ -1294,7 +1294,7 @@ function ExamTakingScreen({ onBack, onFinish, onToast }) {
       )}
 
       {exitOpen && (
-        <div className="trainer-exit-sheet">
+        <div className="session-exit-sheet">
           <div>
             <strong>是否交卷？</strong>
             <button onClick={() => setExitOpen(false)}><X size={20} /></button>
