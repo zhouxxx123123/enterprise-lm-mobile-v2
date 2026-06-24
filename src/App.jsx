@@ -1785,16 +1785,24 @@ function PracticeSessionScreen({ session, onBack, onFinish, onToast }) {
         {session.slide && (
           <section className="training-material-card">
             <div className="training-section-topline">
-              <span>当前页材料</span>
-              <em>{session.slide.bullets.length} 个要点</em>
+              <span>PPT 第 1 页</span>
+              <em>{session.slide.bullets.length} 个讲解要点</em>
             </div>
-            <div className="training-slide-surface">
-              <strong>{session.slide.title}</strong>
-              <ul>
-                {session.slide.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
+            <div className="training-slide-frame" aria-label="PPT 页面预览">
+              <div className="training-slide-toolbar">
+                <span>调研归档管理.pptx</span>
+                <em>1/1</em>
+              </div>
+              <div className="training-slide-surface">
+                <div className="training-slide-brand">康宸内训</div>
+                <strong>{session.slide.title}</strong>
+                <ul>
+                  {session.slide.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+                <div className="training-slide-footer">现场入口 · 流程讲解</div>
+              </div>
             </div>
           </section>
         )}
