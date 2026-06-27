@@ -9,6 +9,7 @@ import {
   CheckCircle,
   ClipboardText,
   Copy,
+  DeviceMobile,
   DotsThree,
   Exam,
   FilePdf,
@@ -261,8 +262,8 @@ const practiceTasks = [
   {
     id: "practice-task-entry",
     title: "完成《调研归档管理》PPT 陪练",
-    summary: "围绕调研归档管理入口讲解当前页内容。",
-    duration: "1 页 · 预计 4 分钟",
+    summary: "按 3 页 PPT 逐页讲解入口价值、操作路径和边界。",
+    duration: "3 页 · 预计 8 分钟",
     due: "今日 18:00",
     status: "进行中",
     result: "上次完成到第 1 页",
@@ -341,8 +342,8 @@ const practiceCategories = [
 const practiceSessions = {
   "entry-talk": {
     title: "完成《调研归档管理》PPT 陪练",
-    progressLabel: "第 1 页 / 题 · 已完成 0/1",
-    stepLabel: "1/1",
+    progressLabel: "第 1 页 / 题 · 已完成 0/3",
+    stepLabel: "1/3",
     scene: "产品讲解",
     type: "PPT 讲解",
     score: 30,
@@ -366,6 +367,84 @@ const practiceSessions = {
       "这页先讲的是调研归档管理为什么是现场入口。",
       "它把新建调研、调研归档和需求记录放到一处。",
       "现场人员最重要的是快速开始、快速回看，不是做复杂后台管理。",
+    ],
+    pages: [
+      {
+        id: "entry-page-1",
+        text: "请按这一页 PPT，向客户讲解“调研归档管理”入口到底解决什么问题。",
+        slide: {
+          title: "调研归档管理",
+          bullets: ["新建调研", "查看调研归档", "生成需求记录"],
+          pageLabel: "1/3",
+          footer: "现场入口 · 流程讲解",
+        },
+        reference:
+          "建议顺序：先说这是现场入口，再讲三件核心事，最后强调它不承接复杂后台管理。",
+        advice: [
+          "先讲“现场为什么要有它”，不要一上来背功能名。",
+          "讲完三件事后，补一句“复杂审批不在手机里做”。",
+        ],
+        scoreFocus: [
+          "有没有先讲价值",
+          "有没有把三件核心事讲全",
+          "有没有把边界说稳",
+        ],
+        transcriptSample: [
+          "这页先讲的是调研归档管理为什么是现场入口。",
+          "它把新建调研、调研归档和需求记录放到一处。",
+          "现场人员最重要的是快速开始、快速回看，不是做复杂后台管理。",
+        ],
+      },
+      {
+        id: "entry-page-2",
+        text: "请按这一页 PPT，向客户讲清楚现场人员进入后第一步应该怎么做。",
+        slide: {
+          title: "现场先关联项目",
+          bullets: ["选择客户或项目", "确认调研对象", "开始本次调研"],
+          pageLabel: "2/3",
+          footer: "第一步 · 防止记录散落",
+        },
+        reference:
+          "建议先讲为什么要先关联项目，再讲关联后所有录音、照片和需求记录都会归到同一条线索下。",
+        advice: [
+          "不要直接跳到录音，要先解释“先关联项目”的必要性。",
+          "把价值说成客户能懂的“后面不会找不到记录”。",
+        ],
+        scoreFocus: [
+          "有没有讲清第一步",
+          "有没有说明关联项目的价值",
+          "有没有避免只背操作按钮",
+        ],
+        transcriptSample: [
+          "进入调研归档后，第一步不是马上录音，而是先关联客户或项目。",
+          "这样后面的调研录音、图片和需求记录都会归到同一个项目下。",
+        ],
+      },
+      {
+        id: "entry-page-3",
+        text: "请按这一页 PPT，向客户说明调研归档管理和复杂后台管理的边界。",
+        slide: {
+          title: "手机端只做现场闭环",
+          bullets: ["现场采集", "快速回看", "生成需求记录"],
+          pageLabel: "3/3",
+          footer: "边界说明 · 后台承接复杂管理",
+        },
+        reference:
+          "建议强调手机端负责现场闭环，复杂审批、排班、统计和后台管理仍然回到管理后台处理。",
+        advice: [
+          "边界要说清楚，不要让客户误以为手机端承接所有后台功能。",
+          "用“现场闭环”和“后台管理”两个层次做区分。",
+        ],
+        scoreFocus: [
+          "有没有讲清手机端边界",
+          "有没有说明后台继续承接复杂管理",
+          "有没有用客户能理解的话收束价值",
+        ],
+        transcriptSample: [
+          "手机端这一块主要解决现场闭环，也就是采集、回看和生成需求记录。",
+          "更复杂的审批、统计和后台管理，仍然放在管理后台里处理。",
+        ],
+      },
     ],
   },
   "boundary-talk": {
@@ -436,7 +515,7 @@ const examItems = [
   {
     id: "exam-survey-weekly",
     title: "移动端调研流程周测",
-    questionCount: 5,
+    questionCount: 3,
     duration: "12 分钟",
     status: "待考",
     category: "调研流程",
@@ -986,6 +1065,51 @@ const getPracticeSession = (sessionKey) =>
 const getExamItem = (examId) =>
   examItems.find((item) => item.id === examId) ?? examItems[0];
 
+const getInitialPrototypeState = () => {
+  const defaults = {
+    screen: "home",
+    practiceCategoryId: practiceCategories[0].id,
+    practiceSessionKey: practiceTasks[0].sessionKey,
+    selectedExamId: examItems[0].id,
+  };
+
+  if (typeof window === "undefined") return defaults;
+
+  const params = new URLSearchParams(window.location.search);
+  const screen = params.get("screen");
+  const practiceCategoryId = params.get("practiceCategory");
+  const practiceSessionKey = params.get("practiceSession");
+  const selectedExamId = params.get("examId");
+  const validScreens = new Set([
+    "workbench",
+    "home",
+    "detail",
+    "chat",
+    "practice",
+    "practice-detail",
+    "practice-session",
+    "practice-report",
+    "exam",
+    "exam-verify",
+    "exam-intro",
+    "exam-taking",
+    "exam-report",
+  ]);
+
+  return {
+    screen: validScreens.has(screen) ? screen : defaults.screen,
+    practiceCategoryId: practiceCategories.some((item) => item.id === practiceCategoryId)
+      ? practiceCategoryId
+      : defaults.practiceCategoryId,
+    practiceSessionKey: practiceSessions[practiceSessionKey]
+      ? practiceSessionKey
+      : defaults.practiceSessionKey,
+    selectedExamId: examItems.some((item) => item.id === selectedExamId)
+      ? selectedExamId
+      : defaults.selectedExamId,
+  };
+};
+
 const tabForScreen = (screen, profileOriginTab = "企业LM") => {
   if (screen.startsWith("profile-")) return profileOriginTab;
   if (["home", "detail", "chat"].includes(screen)) return "企业LM";
@@ -995,19 +1119,20 @@ const tabForScreen = (screen, profileOriginTab = "企业LM") => {
 };
 
 export function App() {
-  const [screen, setScreen] = useState("home");
+  const initialState = useMemo(() => getInitialPrototypeState(), []);
+  const [screen, setScreen] = useState(initialState.screen);
   const [filter, setFilter] = useState("全部");
   const [query, setQuery] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [generated, setGenerated] = useState(null);
   const [toast, setToast] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
   const [profileOriginTab, setProfileOriginTab] = useState("企业LM");
   const [sourcePanel, setSourcePanel] = useState(false);
-  const [practiceCategoryId, setPracticeCategoryId] = useState(practiceCategories[0].id);
-  const [practiceSessionKey, setPracticeSessionKey] = useState(practiceTasks[0].sessionKey);
+  const [practiceCategoryId, setPracticeCategoryId] = useState(initialState.practiceCategoryId);
+  const [practiceSessionKey, setPracticeSessionKey] = useState(initialState.practiceSessionKey);
   const [practiceReturnScreen, setPracticeReturnScreen] = useState("practice");
-  const [selectedExamId, setSelectedExamId] = useState(examItems[0].id);
+  const [selectedExamId, setSelectedExamId] = useState(initialState.selectedExamId);
   const [examDrafts, setExamDrafts] = useState({});
 
   const filteredSpaces = useMemo(() => {
@@ -1026,7 +1151,7 @@ export function App() {
 
   const goChat = () => {
     setScreen("chat");
-    setIsMenuOpen(true);
+    setIsMenuOpen(false);
   };
 
   const openProfileDrawer = () => {
@@ -1059,7 +1184,7 @@ export function App() {
     setSourcePanel(false);
     setToast("");
     setGenerated(null);
-    setIsMenuOpen(true);
+    setIsMenuOpen(false);
 
     const nextScreen = {
       内训工作台: "workbench",
@@ -1636,7 +1761,7 @@ function PracticeScreen({ onOpenTask, onOpenCategory, onReport, onToast }) {
       <header className="module-header training-module-header">
         <div>
           <p className="eyebrow">企业内训 · 源自康宸训练流</p>
-          <h1>模拟陪练</h1>
+          <h1>陪练</h1>
         </div>
         <button
           className="icon-button"
@@ -1747,27 +1872,80 @@ function PracticeRoleScreen() {
 }
 
 function PracticeSessionScreen({ session, onBack, onFinish, onToast }) {
-  const [transcript, setTranscript] = useState("");
+  const pages = session.pages ?? [
+    {
+      id: "single-page",
+      text: session.text,
+      slide: session.slide,
+      reference: session.reference,
+      advice: session.advice,
+      scoreFocus: session.scoreFocus,
+      transcriptSample: session.transcriptSample,
+    },
+  ];
+  const [pageIndex, setPageIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
   const [finishOpen, setFinishOpen] = useState(false);
   const [exitOpen, setExitOpen] = useState(false);
+  const [explainOpen, setExplainOpen] = useState(false);
+  const [landscapeOpen, setLandscapeOpen] = useState(false);
+  const [recording, setRecording] = useState(false);
 
+  const currentPage = pages[pageIndex];
+  const totalPages = pages.length;
+  const transcript = answers[currentPage.id] ?? "";
   const hasAnswer = transcript.trim().length > 0;
+  const doneCount = pages.filter((page) => (answers[page.id] ?? "").trim()).length;
+  const isLastPage = pageIndex === totalPages - 1;
+  const canUseLandscape = Boolean(currentPage.slide);
+  const progressPercent = ((pageIndex + 1) / totalPages) * 100;
+  const primaryLabel = isLastPage ? "查看反馈" : "继续";
+
+  const updateTranscript = (value) => {
+    setAnswers((current) => ({
+      ...current,
+      [currentPage.id]: value,
+    }));
+  };
+
+  const handleContinue = () => {
+    if (recording) {
+      onToast("请先结束录音");
+      return;
+    }
+    if (!hasAnswer) {
+      onToast("本页未作答，反馈会生成待补充状态");
+    }
+    if (isLastPage) {
+      onFinish();
+      return;
+    }
+    setPageIndex((current) => Math.min(totalPages - 1, current + 1));
+  };
+
+  const handlePrevious = () => {
+    if (recording) {
+      onToast("请先结束录音");
+      return;
+    }
+    setPageIndex((current) => Math.max(0, current - 1));
+  };
 
   return (
-    <div className="page training-session-page practice-session-page">
+    <div className="page training-session-page answer-composer-page practice-session-page">
       <header className="flow-header training-session-header">
         <button className="plain-icon" onClick={() => setExitOpen(true)} aria-label="返回">
           <CaretLeft size={30} />
         </button>
         <div>
           <h1>{session.title}</h1>
-          <span>{session.progressLabel}</span>
+          <span>{pageIndex + 1}/{totalPages} · 已完成 {doneCount}/{totalPages}</span>
         </div>
-        <em>{session.stepLabel}</em>
+        <em>{pageIndex + 1}/{totalPages}</em>
       </header>
 
       <div className="training-progress-bar">
-        <i style={{ width: "100%" }} />
+        <i style={{ width: `${progressPercent}%` }} />
       </div>
 
       <div className="training-session-scroll">
@@ -1775,84 +1953,52 @@ function PracticeSessionScreen({ session, onBack, onFinish, onToast }) {
           <div className="training-task-top">
             <div className="training-chip-row">
               <span className="training-chip">{session.scene}</span>
-              <span className="training-chip muted">{session.type}</span>
+              <span className="training-chip muted">演讲题 · {session.type}</span>
             </div>
-            <span className="training-score-pill">本页 {session.score} 分</span>
           </div>
-          <p className="training-task-question">{session.text}</p>
+          <p className="training-task-question">{currentPage.text}</p>
         </section>
 
-        {session.slide && (
+        {currentPage.slide && (
           <section className="training-material-card">
             <div className="training-section-topline">
-              <span>PPT 第 1 页</span>
-              <em>{session.slide.bullets.length} 个讲解要点</em>
+              <span>PPT 第 {pageIndex + 1} 页</span>
+              <button className="landscape-pill" onClick={() => setLandscapeOpen(true)}>
+                <DeviceMobile size={13} />
+                横屏作答
+              </button>
             </div>
-            <div className="training-slide-frame" aria-label="PPT 页面预览">
-              <div className="training-slide-toolbar">
-                <span>调研归档管理.pptx</span>
-                <em>1/1</em>
-              </div>
-              <div className="training-slide-surface">
-                <div className="training-slide-brand">康宸内训</div>
-                <strong>{session.slide.title}</strong>
-                <ul>
-                  {session.slide.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                <div className="training-slide-footer">现场入口 · 流程讲解</div>
-              </div>
-            </div>
+            <TrainingSlidePreview slide={currentPage.slide} />
           </section>
         )}
-
-        <section className="training-coach-panel">
-          <div className="training-inline-label">
-            <Sparkle size={15} weight="fill" />
-            <span>教练提示</span>
-          </div>
-          <div className="training-coach-hero">
-            <strong>参考讲稿 / 参考答案</strong>
-            <p>{session.reference}</p>
-          </div>
-          <div className="training-coach-stack">
-            <TrainingListBlock title="当前建议" items={session.advice} variant="coach" />
-            <TrainingListBlock title="评分关注点" items={session.scoreFocus} variant="coach" />
-          </div>
-        </section>
       </div>
 
       <div className="training-workbench">
-        <TrainingVoiceAnswerCard
+        <TrainingVoiceAnswerDock
+          key={currentPage.id}
           transcript={transcript}
-          onChange={setTranscript}
-          transcriptSample={session.transcriptSample}
-          idleLabel="开始录音后，这里会实时显示本页转写内容。"
-          embeddedControls
+          onChange={updateTranscript}
+          transcriptSample={currentPage.transcriptSample}
           title="本页作答"
-          clearLabel="清空回答"
+          statusLink={hasAnswer && !recording ? "查看讲解" : ""}
+          onStatusLink={() => setExplainOpen(true)}
+          onRecordingChange={setRecording}
         />
 
         <div className="training-bottom-bar">
           <div className="training-action-grid">
-            <button className="training-action ghost disabled" disabled>
-              上一页
-            </button>
-            <button className="training-action danger" onClick={() => setFinishOpen(true)}>
-              结束
+            <button
+              className={pageIndex === 0 ? "training-action ghost disabled" : "training-action ghost"}
+              disabled={pageIndex === 0}
+              onClick={handlePrevious}
+            >
+              上一个
             </button>
             <button
               className="training-action primary"
-              onClick={() => {
-                if (!hasAnswer) {
-                  onToast("请先开始录音并完成本页转写");
-                  return;
-                }
-                onFinish();
-              }}
+              onClick={handleContinue}
             >
-              查看反馈
+              {primaryLabel}
             </button>
           </div>
         </div>
@@ -1861,7 +2007,7 @@ function PracticeSessionScreen({ session, onBack, onFinish, onToast }) {
       {finishOpen && (
         <TrainingConfirmSheet
           title="结束练习"
-          note="已完成 1 / 共 1 页。确认结束并生成训练反馈吗？"
+          note="可以进入反馈页；如果录音仍在处理中，反馈会显示生成中。"
           confirmLabel="生成反馈"
           cancelLabel="继续练习"
           onCancel={() => setFinishOpen(false)}
@@ -1872,12 +2018,45 @@ function PracticeSessionScreen({ session, onBack, onFinish, onToast }) {
       {exitOpen && (
         <TrainingConfirmSheet
           title="退出练习"
-          note="当前练习不会自动保留，确认返回模拟陪练首页吗？"
+          note="当前练习不会自动保留，确认返回陪练首页吗？"
           confirmLabel="确认返回"
           cancelLabel="继续练习"
           warning
           onCancel={() => setExitOpen(false)}
           onConfirm={onBack}
+        />
+      )}
+
+      {explainOpen && (
+        <TrainingInsightSheet
+          title="查看讲解"
+          sections={[
+            { title: "参考答案", content: currentPage.reference },
+            { title: "当前建议", items: currentPage.advice },
+            { title: "评分关注点", items: currentPage.scoreFocus },
+          ]}
+          onClose={() => setExplainOpen(false)}
+        />
+      )}
+
+      {landscapeOpen && canUseLandscape && (
+        <TrainingLandscapeMode
+          title={session.title}
+          progress={`${pageIndex + 1}/${totalPages} · PPT 讲解`}
+          task={currentPage.text}
+          slide={currentPage.slide}
+          answerTitle="本页作答"
+          transcript={transcript}
+          onChange={updateTranscript}
+          transcriptSample={currentPage.transcriptSample}
+          onClose={() => setLandscapeOpen(false)}
+          onToast={onToast}
+          onPrimary={handleContinue}
+          primaryLabel={primaryLabel}
+          canGoPrev={pageIndex > 0}
+          onPrevious={handlePrevious}
+          allowInsight={hasAnswer && !recording}
+          onInsight={() => setExplainOpen(true)}
         />
       )}
     </div>
@@ -1940,7 +2119,7 @@ function ExamScreen({ onOpenExam }) {
       <header className="module-header training-module-header">
         <div>
           <p className="eyebrow">企业内训 · 源自康宸训练流</p>
-          <h1>智能考试</h1>
+          <h1>考试</h1>
         </div>
       </header>
 
@@ -2038,7 +2217,7 @@ function ExamVerifyScreen({ exam, onBack, onStart }) {
       <section className="prep-list compact">
         <article>
           <strong>设备检测</strong>
-          <p>摄像头、麦克风已就绪。主观题进入录音转写页，不支持文本作答。</p>
+          <p>摄像头、麦克风已就绪。主观题使用录音作答，系统在后台转写和评分。</p>
         </article>
       </section>
 
@@ -2093,7 +2272,7 @@ function ExamIntroScreen({ exam, hasDraft, onBack, onStart }) {
       <section className="prep-list compact">
         <article>
           <strong>考试规则</strong>
-          <p>开始后页面会显示倒计时；主观题使用录音作答并实时转写。</p>
+          <p>开始后页面会显示倒计时；主观题使用录音作答，转写和评分由后台继续处理。</p>
         </article>
         <article>
           <strong>续考说明</strong>
@@ -2114,6 +2293,8 @@ function ExamTakingScreen({ exam, initialDraft, onBack, onFinish, onToast }) {
   const [elapsed, setElapsed] = useState(initialDraft?.elapsed ?? 0);
   const [finishOpen, setFinishOpen] = useState(false);
   const [exitOpen, setExitOpen] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [landscapeOpen, setLandscapeOpen] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -2128,6 +2309,14 @@ function ExamTakingScreen({ exam, initialDraft, onBack, onFinish, onToast }) {
   const doneCount = examQuestions.filter((item) => (answers[item.id] ?? "").trim()).length;
   const isLastQuestion = questionIndex === total - 1;
   const isObjective = question.type === "single";
+  const hasMaterial = Boolean(question.slide);
+  const durationSeconds = parseExamDurationSeconds(exam.duration);
+  const remainingSeconds = Math.max(durationSeconds - elapsed, 0);
+  const unansweredCount = total - doneCount;
+  const processingCount = examQuestions.filter((item) => item.type !== "single" && (answers[item.id] ?? "").trim()).length;
+  const progressPercent = ((questionIndex + 1) / total) * 100;
+  const hasCurrentAnswer = (currentAnswer ?? "").trim().length > 0;
+  const primaryDisabled = recording || (!isLastQuestion && !hasCurrentAnswer);
 
   const saveDraftAndBack = () => {
     onBack({
@@ -2137,52 +2326,161 @@ function ExamTakingScreen({ exam, initialDraft, onBack, onFinish, onToast }) {
     });
   };
 
+  const handlePrimaryAction = () => {
+    if (recording) {
+      onToast("请先结束录音");
+      return;
+    }
+    if (isLastQuestion) {
+      setFinishOpen(true);
+      return;
+    }
+    if (!hasCurrentAnswer) {
+      onToast(isObjective ? "请先选择答案再继续" : "请先完成本题录音作答");
+      return;
+    }
+    setQuestionIndex((current) => Math.min(total - 1, current + 1));
+  };
+
   return (
-    <div className="page training-session-page exam-taking-page">
+    <div className="page training-session-page answer-composer-page exam-taking-page">
       <header className="flow-header training-session-header">
         <button className="plain-icon" onClick={() => setExitOpen(true)} aria-label="返回">
           <CaretLeft size={30} />
         </button>
         <div>
           <h1>{exam.title}</h1>
-          <span>第 {questionIndex + 1} 题 · 已答 {doneCount}/{total}</span>
+          <span>{questionIndex + 1}/{total} · 已答 {doneCount}/{total}</span>
         </div>
-        <em>{formatExamSeconds(elapsed)}</em>
+        <em className={remainingSeconds <= 180 ? "exam-timer warning" : "exam-timer"}>
+          {formatCountdownSeconds(remainingSeconds)}
+        </em>
       </header>
 
-      <section className="training-question-card exam">
-        <div className="training-chip-row">
-          <span className="training-chip">第 {questionIndex + 1} 题</span>
-          <span className="training-chip muted">{question.label}</span>
-        </div>
-        <p>{question.text}</p>
-        {question.hint && <div className="training-hint-card">提示：{question.hint}</div>}
-      </section>
+      <div className="training-progress-bar exam-progress-bar">
+        <i style={{ width: `${progressPercent}%` }} />
+      </div>
 
-      {question.slide && (
-        <section className="training-slide-card">
-          <strong>{question.slide.title}</strong>
-          <ul>
-            {question.slide.bullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
+      <div className="exam-session-scroll">
+        <section className="exam-rule-strip" aria-label="考试规则状态">
+          <span>
+            <ShieldCheck size={14} weight="fill" />
+            正式考试
+          </span>
+          <span>倒计时中</span>
+          <span>录音后台处理</span>
         </section>
+
+        <section className="training-question-card exam exam-question-panel">
+          <div className="training-chip-row">
+            <span className="training-chip">第 {questionIndex + 1} / {total} 题</span>
+            <span className="training-chip muted">{question.label}</span>
+            {!isObjective && <span className="training-chip muted">演讲题</span>}
+          </div>
+          <p>{question.text}</p>
+        </section>
+
+        {question.slide && (
+          <section className="training-material-card exam-material-card">
+            <div className="training-section-topline">
+              <span>PPT 第 1 页</span>
+              <button className="landscape-pill" onClick={() => setLandscapeOpen(true)}>
+                <DeviceMobile size={13} />
+                横屏作答
+              </button>
+            </div>
+            <TrainingSlidePreview slide={question.slide} />
+          </section>
+        )}
+
+        {isObjective && (
+          <section className="exam-answer-panel">
+            <div className="training-section-topline">
+              <span>选择答案</span>
+              <em>提交前可修改</em>
+            </div>
+            <TrainingChoiceAnswerCard
+              options={question.options}
+              value={currentAnswer}
+              onChange={(value) =>
+                setAnswers((current) => ({
+                  ...current,
+                  [question.id]: value,
+                }))
+              }
+            />
+          </section>
+        )}
+      </div>
+
+      <div className="training-workbench exam-workbench">
+        {!isObjective && (
+          <TrainingVoiceAnswerDock
+            key={question.id}
+            transcript={currentAnswer}
+            onChange={(value) =>
+              setAnswers((current) => ({
+                ...current,
+                [question.id]: value,
+              }))
+            }
+            transcriptSample={question.transcriptSample}
+            title="本题作答"
+            onRecordingChange={setRecording}
+          />
+        )}
+
+        <div className="training-bottom-bar">
+          <div className="training-action-grid two">
+            <button
+              className={questionIndex === 0 ? "training-action ghost disabled" : "training-action ghost"}
+              disabled={questionIndex === 0}
+              onClick={() => setQuestionIndex((current) => Math.max(0, current - 1))}
+            >
+              上一个
+            </button>
+            <button
+              className={primaryDisabled ? "training-action primary disabled" : "training-action primary"}
+              disabled={primaryDisabled}
+              onClick={handlePrimaryAction}
+            >
+              {isLastQuestion ? "交卷" : "继续"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {finishOpen && (
+        <TrainingConfirmSheet
+          title="确认交卷"
+          note={`已作答 ${doneCount} / 共 ${total} 题，未作答 ${unansweredCount} 题。${processingCount ? `其中 ${processingCount} 题录音处理中，交卷后系统会继续生成报告。` : "确认交卷后进入考试结果页。"}`}
+          confirmLabel="确认交卷"
+          cancelLabel="再检查一下"
+          warning={unansweredCount > 0}
+          onCancel={() => setFinishOpen(false)}
+          onConfirm={onFinish}
+        />
       )}
 
-      {isObjective ? (
-        <TrainingChoiceAnswerCard
-          options={question.options}
-          value={currentAnswer}
-          onChange={(value) =>
-            setAnswers((current) => ({
-              ...current,
-              [question.id]: value,
-            }))
-          }
+      {exitOpen && (
+        <TrainingConfirmSheet
+          title="退出考试"
+          note="本次考试允许中断续考，返回后答题进度会保存，下次进入可继续作答。"
+          confirmLabel="确认返回"
+          cancelLabel="继续考试"
+          warning
+          onCancel={() => setExitOpen(false)}
+          onConfirm={saveDraftAndBack}
         />
-      ) : (
-        <TrainingVoiceAnswerCard
+      )}
+
+      {landscapeOpen && hasMaterial && (
+        <TrainingLandscapeMode
+          title={exam.title}
+          progress={`${questionIndex + 1}/${total} · ${formatCountdownSeconds(remainingSeconds)}`}
+          task={question.text}
+          slide={question.slide}
+          answerTitle="本题作答"
           transcript={currentAnswer}
           onChange={(value) =>
             setAnswers((current) => ({
@@ -2191,105 +2489,57 @@ function ExamTakingScreen({ exam, initialDraft, onBack, onFinish, onToast }) {
             }))
           }
           transcriptSample={question.transcriptSample}
-          idleLabel="开始录音后，这里会实时显示本题转写内容。"
-        />
-      )}
-
-      <div className="training-bottom-bar">
-        <div className="training-action-grid">
-          <button
-            className={questionIndex === 0 ? "training-action ghost disabled" : "training-action ghost"}
-            disabled={questionIndex === 0}
-            onClick={() => setQuestionIndex((current) => Math.max(0, current - 1))}
-          >
-            上一题
-          </button>
-          <button
-            className={isLastQuestion ? "training-action primary" : "training-action danger"}
-            onClick={() => {
-              if (!(currentAnswer ?? "").trim()) {
-                onToast(isObjective ? "请先选择答案" : "请先开始录音并完成本题转写");
-                return;
-              }
-              setFinishOpen(true);
-            }}
-          >
-            {isLastQuestion ? "交卷" : "结束考试"}
-          </button>
-          <button
-            className={isLastQuestion ? "training-action primary disabled" : "training-action primary"}
-            disabled={isLastQuestion}
-            onClick={() => {
-              if (!(currentAnswer ?? "").trim()) {
-                onToast(isObjective ? "请先选择答案再进入下一题" : "请先完成当前题录音转写");
-                return;
-              }
-              setQuestionIndex((current) => Math.min(total - 1, current + 1));
-            }}
-          >
-            下一题
-          </button>
-        </div>
-      </div>
-
-      {finishOpen && (
-        <TrainingConfirmSheet
-          title={isLastQuestion ? "确认交卷" : "结束考试"}
-          note={
-            isLastQuestion
-              ? `已作答 ${doneCount} / 共 ${total} 题，确认交卷后进入考试结果页。`
-              : "当前结束后答题进度会保留，下次进入可继续作答。"
-          }
-          confirmLabel={isLastQuestion ? "确认交卷" : "确认结束"}
-          cancelLabel={isLastQuestion ? "再检查一下" : "继续考试"}
-          warning={!isLastQuestion}
-          onCancel={() => setFinishOpen(false)}
-          onConfirm={isLastQuestion ? onFinish : saveDraftAndBack}
-        />
-      )}
-
-      {exitOpen && (
-        <TrainingConfirmSheet
-          title="退出考试"
-          note="返回后答题进度已保存，下次进入可继续作答。"
-          confirmLabel="确认返回"
-          cancelLabel="继续考试"
-          warning
-          onCancel={() => setExitOpen(false)}
-          onConfirm={saveDraftAndBack}
+          onClose={() => setLandscapeOpen(false)}
+          onToast={onToast}
+          onPrimary={handlePrimaryAction}
+          primaryLabel={isLastQuestion ? "交卷" : "继续"}
+          primaryDisabled={primaryDisabled}
+          canGoPrev={questionIndex > 0}
+          onPrevious={() => setQuestionIndex((current) => Math.max(0, current - 1))}
         />
       )}
     </div>
   );
 }
 
-function TrainingListBlock({ title, items, variant = "muted" }) {
-  const className = variant === "coach" ? "training-coach-list" : "training-muted-block";
-
+function TrainingSlidePreview({ slide }) {
   return (
-    <div className={className}>
-      <strong>{title}</strong>
-      <ul>
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+    <div className="training-slide-frame" aria-label="PPT 页面预览">
+      <div className="training-slide-toolbar">
+        <span>{slide.fileName ?? "调研归档管理.pptx"}</span>
+        <em>{slide.pageLabel ?? "1/1"}</em>
+      </div>
+      <div className="training-slide-surface">
+        <div className="training-slide-brand">康宸内训</div>
+        <strong>{slide.title}</strong>
+        <ul>
+          {slide.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
+        <div className="training-slide-footer">{slide.footer ?? "现场入口 · 流程讲解"}</div>
+      </div>
     </div>
   );
 }
 
-function TrainingVoiceAnswerCard({
+function TrainingVoiceAnswerDock({
   transcript,
   onChange,
-  transcriptSample,
-  idleLabel,
-  embeddedControls = false,
-  title = "实时转写",
-  clearLabel = "清空当前回答",
+  transcriptSample = [],
+  title,
+  statusLink = "",
+  onStatusLink,
+  onRecordingChange,
 }) {
   const [recording, setRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [recordedSeconds, setRecordedSeconds] = useState(0);
   const [cursor, setCursor] = useState(0);
+
+  useEffect(() => {
+    onRecordingChange?.(recording);
+  }, [onRecordingChange, recording]);
 
   useEffect(() => {
     if (!recording) return undefined;
@@ -2309,65 +2559,203 @@ function TrainingVoiceAnswerCard({
     return () => window.clearTimeout(timer);
   }, [cursor, onChange, recording, transcript, transcriptSample]);
 
-  const toggleRecording = () => {
+  const hasAnswer = transcript.trim().length > 0;
+  const displaySeconds = recordedSeconds || seconds;
+  const status = recording
+    ? `录音中 ${formatVoiceSeconds(seconds)}`
+    : hasAnswer
+      ? displaySeconds
+        ? `已录音 ${formatVoiceSeconds(displaySeconds)}`
+        : "已录音"
+      : "待开始";
+  const statusNote = recording
+    ? "录音中不可切换"
+    : hasAnswer
+      ? "处理中 · 后台转写和评分"
+      : "点击开始录制";
+  const buttonLabel = recording ? "结束录音" : hasAnswer ? "重录" : "开始录音";
+
+  const handleRecord = () => {
     if (recording) {
       setRecording(false);
+      setRecordedSeconds(Math.max(seconds, 1));
       return;
+    }
+    if (hasAnswer) {
+      onChange("");
+      setCursor(0);
+      setSeconds(0);
+      setRecordedSeconds(0);
     }
     setRecording(true);
   };
 
-  const clearTranscript = () => {
-    setRecording(false);
-    setSeconds(0);
-    setCursor(0);
-    onChange("");
+  return (
+    <section className="voice-answer-dock">
+      <div className="voice-answer-status">
+        <div>
+          <strong>{title} · {status}</strong>
+          <span>{statusNote}</span>
+        </div>
+        {statusLink && (
+          <button className="voice-status-link" onClick={onStatusLink}>
+            {statusLink}
+          </button>
+        )}
+      </div>
+
+      {hasAnswer && (
+        <details className="voice-transcript-detail">
+          <summary>查看转写</summary>
+          <p>{transcript}</p>
+        </details>
+      )}
+
+      <button className={recording ? "voice-record-main recording" : "voice-record-main"} onClick={handleRecord}>
+        <Microphone size={18} />
+        {buttonLabel}
+      </button>
+    </section>
+  );
+}
+
+function TrainingInsightSheet({ title, sections, onClose }) {
+  return (
+    <div className="training-confirm-mask">
+      <div className="insight-sheet">
+        <div className="training-confirm-head">
+          <strong>{title}</strong>
+          <button onClick={onClose} aria-label="关闭">
+            <X size={18} />
+          </button>
+        </div>
+        <div className="insight-section-stack">
+          {sections.map((section) => (
+            <section key={section.title} className="insight-section">
+              <strong>{section.title}</strong>
+              {section.content && <p>{section.content}</p>}
+              {section.items && (
+                <ul>
+                  {section.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TrainingLandscapeMode({
+  title,
+  progress,
+  task,
+  slide,
+  answerTitle,
+  transcript,
+  onChange,
+  transcriptSample,
+  onClose,
+  onToast,
+  onPrimary,
+  primaryLabel,
+  primaryDisabled = false,
+  canGoPrev = false,
+  onPrevious,
+  allowInsight = false,
+  onInsight,
+}) {
+  const [recording, setRecording] = useState(false);
+
+  const handlePrevious = () => {
+    if (!canGoPrev) return;
+    if (recording) {
+      onToast("请先结束录音");
+      return;
+    }
+    onPrevious?.();
+  };
+
+  const handlePrimary = () => {
+    if (recording) {
+      onToast("请先结束录音");
+      return;
+    }
+    if (primaryDisabled) return;
+    onPrimary();
   };
 
   return (
-    <>
-      <section className={embeddedControls ? "training-voice-card embedded" : "training-voice-card"}>
-        <div className="training-voice-head">
-          <span>{title}</span>
-          <button onClick={clearTranscript}>{clearLabel}</button>
-        </div>
-        <div className="training-transcript-box">
-          {transcript ? (
-            <p>{transcript}</p>
-          ) : (
-            <em>{idleLabel}</em>
+    <div className="landscape-mode-mask">
+      <div className="landscape-mode">
+        <main className="landscape-stage">
+          <header className="landscape-topbar">
+            <button onClick={onClose} aria-label="关闭横屏作答">
+              <CaretLeft size={20} />
+            </button>
+            <div>
+              <strong>{title}</strong>
+              <span>{progress}</span>
+            </div>
+          </header>
+          <TrainingSlidePreview slide={slide} />
+        </main>
+        <aside className="landscape-control-rail">
+          <button className="landscape-more" onClick={onClose} aria-label="更多或退出">
+            <DotsThree size={22} />
+          </button>
+          <p>{task}</p>
+          <div className="landscape-nav-stack">
+            <button
+              className={canGoPrev ? "landscape-nav" : "landscape-nav disabled"}
+              disabled={!canGoPrev || recording}
+              onClick={handlePrevious}
+            >
+              <CaretLeft size={18} />
+              上一个
+            </button>
+            <button
+              className={primaryDisabled ? "landscape-nav primary disabled" : "landscape-nav primary"}
+              disabled={primaryDisabled}
+              onClick={handlePrimary}
+            >
+              <CaretRight size={18} />
+              {primaryLabel}
+            </button>
+          </div>
+          <TrainingVoiceAnswerDock
+            transcript={transcript}
+            onChange={onChange}
+            transcriptSample={transcriptSample}
+            title={answerTitle}
+            onRecordingChange={setRecording}
+          />
+          {allowInsight && (
+            <button className="landscape-insight-link" onClick={onInsight}>
+              查看讲解
+            </button>
           )}
-        </div>
-        <div className="training-voice-meta">
-          <span>
-            {recording
-              ? `录音中 ${formatVoiceSeconds(seconds)}`
-              : "语音作答 + 实时转写"}
-          </span>
-          <span>{transcript.split("\n").filter(Boolean).length} 段</span>
-        </div>
-        {embeddedControls && (
-          <button
-            className={recording ? "training-record-button recording inline" : "training-record-button inline"}
-            onClick={toggleRecording}
-          >
-            <Microphone size={18} />
-            {recording ? "暂停录音" : "开始录音"}
-          </button>
-        )}
-      </section>
-      {!embeddedControls && (
-        <div className="training-record-dock">
-          <button
-            className={recording ? "training-record-button recording" : "training-record-button"}
-            onClick={toggleRecording}
-          >
-            <Microphone size={18} />
-            {recording ? "暂停录音" : "开始录音"}
-          </button>
-        </div>
-      )}
-    </>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+function TrainingListBlock({ title, items, variant = "muted" }) {
+  const className = variant === "coach" ? "training-coach-list" : "training-muted-block";
+
+  return (
+    <div className={className}>
+      <strong>{title}</strong>
+      <ul>
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -2427,15 +2815,19 @@ function TrainingConfirmSheet({
   );
 }
 
-function formatExamSeconds(totalSeconds) {
-  const hours = Math.floor(totalSeconds / 3600)
-    .toString()
-    .padStart(2, "0");
+function parseExamDurationSeconds(duration = "") {
+  const minutes = Number.parseInt(duration, 10);
+  return Number.isFinite(minutes) ? minutes * 60 : 0;
+}
+
+function formatCountdownSeconds(totalSeconds) {
+  const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60)
     .toString()
     .padStart(2, "0");
   const seconds = (totalSeconds % 60).toString().padStart(2, "0");
-  return `${hours}:${minutes}:${seconds}`;
+  if (hours <= 0) return `${minutes}:${seconds}`;
+  return `${hours.toString().padStart(2, "0")}:${minutes}:${seconds}`;
 }
 
 function formatVoiceSeconds(totalSeconds) {
@@ -2448,7 +2840,7 @@ function formatVoiceSeconds(totalSeconds) {
 
 function ExamReportScreen({ exam, onBack, onToast }) {
   return (
-    <div className="page report-page training-report-page">
+    <div className="page report-page training-report-page exam-report-page">
       <header className="flow-header">
         <button className="plain-icon" onClick={onBack} aria-label="返回">
           <CaretLeft size={30} />

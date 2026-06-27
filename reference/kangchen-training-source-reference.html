@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>康宸企业内训原型参考板</title>
+    <style>
+      :root {
+        --bg: #eef2f6;
+        --card: #ffffff;
+        --muted: #667085;
+        --text: #1d2939;
+        --line: #e4e7ec;
+        --primary: #10b981;
+        --primary-soft: rgba(16, 185, 129, 0.1);
+        --danger: #ef4444;
+        --danger-soft: rgba(239, 68, 68, 0.12);
+        --amber-soft: #fff7ed;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+        background:
+          radial-gradient(circle at top, #ffffff 0, #f7f9fb 24%, #edf1f5 70%, #e8edf2 100%);
+        color: var(--text);
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 28px 22px 48px;
+      }
+
+      .hero {
+        max-width: 1320px;
+        margin: 0 auto 20px;
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .board {
+        max-width: 1320px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(320px, 1fr));
+        gap: 28px 22px;
+      }
+
+      .panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .panel h2 {
+        margin: 0;
+        font-size: 17px;
+      }
+
+      .panel p {
+        margin: 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .phone {
+        width: 375px;
+        height: 812px;
+        margin: 0 auto;
+        border-radius: 42px;
+        border: 10px solid #fff;
+        overflow: hidden;
+        background: #f8fafc;
+        box-shadow:
+          0 18px 48px rgba(15, 23, 42, 0.14),
+          inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+      }
+
+      .screen {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: #f8fafc;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 10px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.94);
+      }
+
+      .nav .side,
+      .nav .right {
+        width: 52px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .nav .center {
+        flex: 1;
+        text-align: center;
+      }
+
+      .nav strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .nav small {
+        display: block;
+        margin-top: 2px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .content {
+        flex: 1;
+        overflow: hidden;
+        padding: 14px;
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 14px;
+      }
+
+      .task-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .task-item + .task-item {
+        margin-top: 10px;
+      }
+
+      .task-title {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      .task-meta {
+        margin-top: 4px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 10px;
+        border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      .badge.warn {
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .shortcut {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+        padding: 14px 10px;
+        text-align: center;
+      }
+
+      .shortcut .icon {
+        width: 34px;
+        height: 34px;
+        margin: 0 auto 8px;
+        border-radius: 12px;
+        background: var(--primary-soft);
+      }
+
+      .shortcut span {
+        display: block;
+        font-size: 12px;
+      }
+
+      .verify-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 28px 28px;
+        text-align: center;
+      }
+
+      .scan {
+        width: 176px;
+        height: 176px;
+        border-radius: 50%;
+        border: 2px dashed rgba(16, 185, 129, 0.4);
+        background: rgba(16, 185, 129, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .scan::before {
+        content: "";
+        width: 82px;
+        height: 82px;
+        border-radius: 24px;
+        border: 3px solid var(--primary);
+      }
+
+      .primary-btn,
+      .ghost-btn,
+      .danger-btn {
+        height: 46px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+      }
+
+      .primary-btn {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .ghost-btn {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+      }
+
+      .danger-btn {
+        background: var(--danger);
+        color: #fff;
+      }
+
+      .tips {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 14px;
+        background: #f5f7fa;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .tip-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--primary-soft);
+        flex: 0 0 auto;
+      }
+
+      .filter-row {
+        display: flex;
+        gap: 8px;
+        padding: 12px 14px 0;
+      }
+
+      .filter {
+        height: 28px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        padding: 0 12px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 12px;
+        color: var(--muted);
+        background: #fff;
+      }
+
+      .filter.active {
+        border-color: rgba(16, 185, 129, 0.3);
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+
+      .progress-track {
+        height: 4px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: #e7ecf1;
+        margin-top: 8px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: var(--primary);
+      }
+
+      .chip-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .chip {
+        height: 24px;
+        border-radius: 999px;
+        padding: 0 10px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 11px;
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+
+      .chip.gray {
+        background: #f2f4f7;
+        color: var(--muted);
+      }
+
+      .slide {
+        border-radius: 18px;
+        border: 1px solid #d9ecff;
+        background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+        padding: 14px;
+      }
+
+      .slide strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .slide ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+
+      .advice {
+        border-radius: 16px;
+        padding: 12px;
+        background: var(--amber-soft);
+      }
+
+      .advice strong {
+        font-size: 12px;
+        color: #b45309;
+      }
+
+      .advice p {
+        margin: 8px 0 0;
+        font-size: 13px;
+        color: #475467;
+        line-height: 1.65;
+      }
+
+      .muted-block {
+        border-radius: 16px;
+        background: #f8fafc;
+        padding: 12px;
+      }
+
+      .muted-block strong {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .muted-block ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .voice-box {
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 14px;
+      }
+
+      .voice-box .transcript {
+        min-height: 126px;
+        margin-top: 10px;
+        border-radius: 16px;
+        background: #f8fafc;
+        padding: 12px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #475467;
+      }
+
+      .voice-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .bottom-bar {
+        border-top: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.96);
+        padding: 10px 12px 14px;
+      }
+
+      .action-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .action {
+        height: 44px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+      }
+
+      .action.ghost {
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .action.primary {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .action.danger {
+        background: var(--danger);
+        color: #fff;
+      }
+
+      .option {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        padding: 12px;
+        font-size: 13px;
+      }
+
+      .option b {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #f2f4f7;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .option.active {
+        border-color: rgba(16, 185, 129, 0.3);
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .option.active b {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      @media (max-width: 1220px) {
+        .board {
+          grid-template-columns: repeat(2, minmax(320px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero">
+        <h1>康宸企业内训参考板</h1>
+        <p>
+          这组图的来源是
+          `移动端应用前端/src/app/components/training/`
+          下面的 `TrainingPractice.tsx`、`TrainingExam.tsx`、`FaceVerify.tsx`。其中练习进行页、考试进行页在旧 demo
+          dist 中会报错，所以这两页按源码结构做了静态还原。
+        </p>
+      </div>
+
+      <div class="board">
+        <section class="panel">
+          <h2>企业内训首页</h2>
+          <p>真实可运行页结构</p>
+          <div class="phone">
+            <div class="screen">
+              <div class="content stack" style="padding-top: 20px;">
+                <div class="card" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); color: #fff;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:14px;">企业内训</span>
+                    <span style="font-size:12px;opacity:.9;">我的任务</span>
+                  </div>
+                  <div class="task-item" style="margin-top:12px;color:#fff;">
+                    <div>
+                      <div class="task-title">练习 · 医生培训开场讲解练习</div>
+                      <div class="task-meta" style="color:rgba(255,255,255,.82)">昨日 19:00</div>
+                    </div>
+                  </div>
+                  <div class="task-item" style="margin-top:10px;color:#fff;">
+                    <div>
+                      <div class="task-title">考试 · 移动端调研流程周测</div>
+                      <div class="task-meta" style="color:rgba(255,255,255,.82)">今日 22:00</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid3">
+                  <div class="shortcut"><div class="icon"></div><span>我的学习</span></div>
+                  <div class="shortcut"><div class="icon"></div><span>模拟练习</span></div>
+                  <div class="shortcut"><div class="icon"></div><span>智能考试</span></div>
+                </div>
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">学习数据</div>
+                      <div class="task-meta">已完成 2/4 课</div>
+                    </div>
+                    <div style="font-size:22px;font-weight:700;">312</div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">学习排名</div>
+                      <div class="task-meta">共 42 人</div>
+                    </div>
+                    <div style="font-size:22px;font-weight:700;">第 3 名</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-bar">
+                <div class="action-grid" style="grid-template-columns:repeat(2,1fr);">
+                  <div class="action primary">首页</div>
+                  <div class="action ghost">我的</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>模拟陪练首页</h2>
+          <p>真实可运行页结构</p>
+          <div class="phone">
+            <div class="screen">
+              <div class="nav">
+                <div class="side">返回</div>
+                <div class="center"><strong>模拟陪练</strong></div>
+                <div class="right"></div>
+              </div>
+              <div class="content stack">
+                <div>
+                  <div style="font-size:14px;">我的练习任务</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:4px;">先做组织下发的练习任务，再做自选陪练。</div>
+                </div>
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">完成《调研归档管理》PPT 陪练</div>
+                      <div class="task-meta">进行中</div>
+                    </div>
+                    <span class="badge">进行中</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">需求评估边界说明练习</div>
+                      <div class="task-meta">待完成</div>
+                    </div>
+                    <span class="badge">待完成</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">医生培训开场讲解练习</div>
+                      <div class="task-meta">待完成</div>
+                    </div>
+                    <span class="badge">待完成</span>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:14px;">自选练习课题</div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:4px;">按业务场景自己选练什么，不影响任务完成状态。</div>
+                </div>
+                <div class="card">
+                  <div class="task-title">产品讲解</div>
+                  <div class="task-meta">康宸产品核心功能与调研归档管理入口讲解练习</div>
+                </div>
+                <div class="card">
+                  <div class="task-title">现场答疑</div>
+                  <div class="task-meta">客户现场问题的稳妥回答与沟通技巧练习</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>人脸验证</h2>
+          <p>真实可运行页结构</p>
+          <div class="phone">
+            <div class="screen" style="background:linear-gradient(180deg, rgba(16,185,129,.08) 0%, #fff 38%, #fff 100%);">
+              <div class="nav" style="background:transparent;border-bottom:none;">
+                <div class="side">返回</div>
+                <div class="center"><strong>身份验证</strong></div>
+                <div class="right"></div>
+              </div>
+              <div class="verify-wrap">
+                <div class="scan"></div>
+                <div style="margin-top:30px;font-size:18px;font-weight:600;">您即将进行人脸识别验证</div>
+                <div style="margin-top:10px;font-size:13px;line-height:1.7;color:var(--muted);">
+                  本次考试前需完成身份核验，请将面部置于框内，保持光线充足。
+                </div>
+              </div>
+              <div style="padding:0 18px 22px;">
+                <div class="tips"><span class="tip-dot"></span>人脸数据仅用于身份核验，不会留存。</div>
+                <div class="primary-btn" style="margin-top:12px;">开始验证</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>陪练进行页</h2>
+          <p>按 `TrainingPracticeSession` 源码还原</p>
+          <div class="phone">
+            <div class="screen">
+              <div class="nav">
+                <div class="side">返回</div>
+                <div class="center">
+                  <strong>完成《调研归档管理》PPT 陪练</strong>
+                  <small>第 1 页 / 题 · 已完成 0/1</small>
+                </div>
+                <div class="right">1/1</div>
+              </div>
+              <div class="content stack">
+                <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
+                <div class="card">
+                  <div class="chip-row">
+                    <span class="chip">产品讲解</span>
+                    <span class="chip gray">PPT 讲解</span>
+                    <span style="margin-left:auto;font-size:11px;color:var(--muted);">本页 30 分</span>
+                  </div>
+                  <div style="margin-top:10px;font-size:14px;line-height:1.7;">
+                    请按这一页 PPT，向客户讲解“调研归档管理”入口到底解决什么问题。
+                  </div>
+                </div>
+                <div class="slide">
+                  <strong>调研归档管理</strong>
+                  <ul>
+                    <li>新建调研</li>
+                    <li>查看调研归档</li>
+                    <li>生成需求记录</li>
+                  </ul>
+                </div>
+                <div class="card">
+                  <div class="chip-row" style="margin-bottom:10px;">
+                    <span class="chip">当前页建议</span>
+                  </div>
+                  <div class="advice">
+                    <strong>参考讲稿 / 参考答案</strong>
+                    <p>建议顺序：先说这是现场入口，再讲三件核心事，最后强调它不承接复杂后台管理。</p>
+                  </div>
+                  <div class="muted-block" style="margin-top:10px;">
+                    <strong>当前建议</strong>
+                    <ul>
+                      <li>先讲“现场为什么要有它”，不要一上来背功能名。</li>
+                      <li>讲完三件事后，补一句“复杂审批不在手机里做”。</li>
+                    </ul>
+                  </div>
+                  <div class="muted-block" style="margin-top:10px;">
+                    <strong>评分关注点</strong>
+                    <ul>
+                      <li>有没有先讲价值</li>
+                      <li>有没有把三件核心事讲全</li>
+                      <li>有没有把边界说稳</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="voice-box">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+                    <span>实时转写</span>
+                    <span>清空本页回答</span>
+                  </div>
+                  <div class="transcript">
+                    这页先讲的是调研归档管理为什么是现场入口。<br />
+                    它把新建调研、调研归档和需求记录放到一处。<br />
+                    现场人员最重要的是快速开始、快速回看，不是做复杂后台管理。
+                  </div>
+                  <div class="voice-meta">
+                    <span>语音作答 + 实时转写</span>
+                    <span>3 段</span>
+                  </div>
+                  <div class="primary-btn" style="margin-top:10px;">开始录音</div>
+                </div>
+              </div>
+              <div class="bottom-bar">
+                <div class="action-grid">
+                  <div class="action ghost">上一页</div>
+                  <div class="action danger">结束</div>
+                  <div class="action primary">查看反馈</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>考试列表 / 开考前</h2>
+          <p>真实可运行页结构</p>
+          <div class="phone">
+            <div class="screen">
+              <div class="nav">
+                <div class="side">返回</div>
+                <div class="center"><strong>智能考试</strong></div>
+                <div class="right"></div>
+              </div>
+              <div class="filter-row">
+                <div class="filter active">待考</div>
+                <div class="filter">进行中</div>
+                <div class="filter">已完成</div>
+              </div>
+              <div class="content stack" style="padding-top:12px;">
+                <div class="card">
+                  <div class="task-item">
+                    <div>
+                      <div class="task-title">移动端调研流程周测</div>
+                      <div class="task-meta">调研流程 · 5 题 · 12 分钟</div>
+                    </div>
+                    <span class="badge">待考</span>
+                  </div>
+                  <div class="task-item" style="margin-top:14px;">
+                    <div class="task-meta">截止 今日 22:00</div>
+                    <div class="primary-btn" style="width:108px;height:38px;border-radius:12px;font-size:13px;">开始考试</div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div style="font-size:14px;">开始考试</div>
+                  <div class="task-title" style="margin-top:12px;">移动端调研流程周测</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+                    <div class="muted-block" style="text-align:center;">
+                      <strong>总题数</strong>
+                      <div style="margin-top:6px;font-size:18px;font-weight:700;color:var(--text);">5 题</div>
+                    </div>
+                    <div class="muted-block" style="text-align:center;">
+                      <strong>总时长</strong>
+                      <div style="margin-top:6px;font-size:18px;font-weight:700;color:var(--text);">12 分钟</div>
+                    </div>
+                  </div>
+                  <div class="muted-block" style="margin-top:12px;">
+                    <strong>考试规则</strong>
+                    <ul>
+                      <li>开始后页面会显示倒计时。</li>
+                      <li>主观题使用语音作答，并实时显示转写内容。</li>
+                      <li>中途退出后答题进度会保留，下次进入可继续作答。</li>
+                    </ul>
+                  </div>
+                  <div class="primary-btn" style="margin-top:12px;">开始考试</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>考试进行页</h2>
+          <p>按 `ExamRunning` 源码还原</p>
+          <div class="phone">
+            <div class="screen">
+              <div class="nav">
+                <div class="side">返回</div>
+                <div class="center">
+                  <strong>移动端调研流程周测</strong>
+                  <small>第 1 题 · 已答 0/4</small>
+                </div>
+                <div class="right" style="text-align:right;">00:03:28</div>
+              </div>
+              <div class="content stack">
+                <div class="card">
+                  <div class="chip-row">
+                    <span class="chip">第 1 题</span>
+                    <span class="chip gray">PPT 讲解</span>
+                  </div>
+                  <div style="margin-top:10px;font-size:14px;line-height:1.7;">
+                    请基于下方 PPT 页面，向客户讲清楚“调研归档管理”入口的现场价值。
+                  </div>
+                </div>
+                <div class="slide">
+                  <strong>调研归档管理</strong>
+                  <ul>
+                    <li>新建调研</li>
+                    <li>查看调研归档</li>
+                    <li>生成需求记录</li>
+                  </ul>
+                </div>
+                <div class="voice-box">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+                    <span>实时转写</span>
+                    <span>清空本题回答</span>
+                  </div>
+                  <div class="transcript">
+                    这一页先讲的是调研归档管理为什么是现场入口。<br />
+                    到了医院现场，要先把项目关联上，再去开始调研。
+                  </div>
+                  <div class="voice-meta">
+                    <span>录音中 00:28</span>
+                    <span>2 段</span>
+                  </div>
+                  <div class="danger-btn" style="margin-top:10px;background:#f59e0b;">暂停录音</div>
+                </div>
+                <div class="card">
+                  <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">切到客观题时的呈现</div>
+                  <div class="option active"><b>A</b><span>直接开始录音</span></div>
+                  <div class="option"><b>B</b><span>先关联项目，再开始调研</span></div>
+                  <div class="option"><b>C</b><span>先生成需求记录</span></div>
+                </div>
+              </div>
+              <div class="bottom-bar">
+                <div class="action-grid">
+                  <div class="action ghost">上一题</div>
+                  <div class="action danger">结束考试</div>
+                  <div class="action primary">下一题</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

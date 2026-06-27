@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>康宸移动端原型参考 - 练习与考试</title>
+    <style>
+      :root {
+        --bg: #eef2f5;
+        --card: #ffffff;
+        --text: #1f2329;
+        --muted: #6b7280;
+        --line: #d7dde5;
+        --accent: #00c090;
+        --danger: #ff4d4f;
+        --dark: rgba(0, 0, 0, 0.68);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
+          sans-serif;
+        background:
+          radial-gradient(circle at top, #ffffff 0, #f7f9fb 24%, #edf1f5 65%, #e7ebf0 100%);
+        color: var(--text);
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 28px 20px 48px;
+      }
+
+      .hero {
+        max-width: 1180px;
+        margin: 0 auto 18px;
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .hero p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .board {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(320px, 1fr));
+        gap: 28px 24px;
+      }
+
+      .panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .panel-head {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .panel-head strong {
+        font-size: 16px;
+      }
+
+      .panel-head span {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .phone {
+        width: 375px;
+        height: 812px;
+        margin: 0 auto;
+        border-radius: 42px;
+        border: 10px solid #ffffff;
+        overflow: hidden;
+        background: #f5f5f5;
+        box-shadow:
+          0 18px 48px rgba(15, 23, 42, 0.12),
+          inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+        position: relative;
+      }
+
+      .screen {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shell {
+        position: absolute;
+        inset: 0;
+        padding: 22px 16px 18px;
+      }
+
+      .top-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .face-wrap {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle at center, #d7f8ef 0 30%, #edf7f4 31% 58%, #e2eef0 59% 100%);
+        position: relative;
+        overflow: hidden;
+        flex: 0 0 auto;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+      }
+
+      .face-wrap.large {
+        width: 190px;
+        height: 190px;
+        margin: 0 auto;
+      }
+
+      .face-circle {
+        position: absolute;
+        inset: 18px;
+        border-radius: 50%;
+        border: 3px solid rgba(0, 192, 144, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, rgba(255,255,255,0.92), rgba(236,248,245,0.92));
+      }
+
+      .face-circle::before {
+        content: "";
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow:
+          0 60px 0 -18px var(--accent),
+          -20px 58px 0 -18px var(--accent),
+          20px 58px 0 -18px var(--accent);
+      }
+
+      .badge {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.42);
+        color: #ffffff;
+        height: 24px;
+        padding: 0 12px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .right-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .timer {
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        font-size: 18px;
+        padding: 10px 18px;
+        border-radius: 12px;
+      }
+
+      .danger-btn {
+        min-width: 94px;
+        height: 38px;
+        background: var(--danger);
+        color: #fff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .progress-stack {
+        width: 132px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .progress-track {
+        height: 8px;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--accent);
+        border-radius: inherit;
+      }
+
+      .progress-text {
+        color: var(--accent);
+        font-size: 12px;
+      }
+
+      .chat-area {
+        height: 330px;
+        padding: 0 4px;
+        overflow: hidden;
+      }
+
+      .bubble-row {
+        display: flex;
+        margin: 14px 0;
+      }
+
+      .bubble-row.left {
+        justify-content: flex-start;
+      }
+
+      .bubble-row.right {
+        justify-content: flex-end;
+      }
+
+      .bubble {
+        max-width: 84%;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 16px;
+        font-size: 16px;
+        line-height: 1.5;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+      }
+
+      .tip-card {
+        margin: 0 0 10px;
+        background: rgba(0, 0, 0, 0.72);
+        color: #fff;
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .tip-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .tip-head strong {
+        color: var(--accent);
+        font-size: 14px;
+      }
+
+      .send-chip {
+        min-width: 71px;
+        height: 24px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .tip-body {
+        margin: 0 0 12px;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .textarea {
+        background: #fff;
+        border-radius: 12px;
+        min-height: 62px;
+        padding: 14px;
+        color: #8b93a1;
+        font-size: 15px;
+      }
+
+      .talk-wrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 18px;
+        padding: 0 30px;
+      }
+
+      .talk-btn {
+        height: 56px;
+        border-radius: 28px;
+        background: var(--accent);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .talk-btn::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        border-radius: 10px;
+        border: 3px solid #fff;
+        border-top-width: 6px;
+      }
+
+      .verify-shell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 36px;
+      }
+
+      .verify-card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .verify-copy {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 24px;
+      }
+
+      .primary-btn {
+        margin-top: 96px;
+        width: 100%;
+        height: 52px;
+        background: var(--accent);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .list-screen {
+        background: #fff;
+        padding: 18px 16px;
+      }
+
+      .list-card {
+        background: #f6faff;
+        border-radius: 14px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .list-left {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-width: 0;
+      }
+
+      .list-icon {
+        width: 48px;
+        height: 52px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #dceeff, #e9f4ff);
+        position: relative;
+        flex: 0 0 auto;
+      }
+
+      .list-icon::before {
+        content: "";
+        position: absolute;
+        inset: 12px 14px;
+        border-radius: 8px;
+        border: 2px solid #6da8ff;
+      }
+
+      .list-meta strong {
+        display: block;
+        font-size: 15px;
+        line-height: 1.45;
+        margin-bottom: 6px;
+      }
+
+      .list-meta span {
+        display: block;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .ghost-btn {
+        height: 38px;
+        padding: 0 14px;
+        border-radius: 20px;
+        background: #fff;
+        border: 1px solid #e6ebf1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .nav-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        padding-top: 14px;
+        margin-bottom: 18px;
+      }
+
+      @media (max-width: 920px) {
+        .board {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero">
+        <h1>康宸移动端原型参考：练习与考试</h1>
+        <p>
+          这组参考图只根据旧原型源码里的四个页面还原：`exam.vue`、`recognition.vue`、`coureEaxm.vue`、
+          `examination.vue`。目的是确认旧稿形态，不代表当前产品方案。
+        </p>
+      </div>
+
+      <div class="board">
+        <section class="panel">
+          <div class="panel-head">
+            <strong>考试列表</strong>
+            <span>来源：`pages/exam/exam.vue`</span>
+          </div>
+          <div class="phone">
+            <div class="screen list-screen">
+              <div class="nav-title">智能考试-选择课程</div>
+              <div class="list-card">
+                <div class="list-left">
+                  <div class="list-icon"></div>
+                  <div class="list-meta">
+                    <strong>高意向客户接待</strong>
+                    <span>2 道题 · 单选题 + 演讲题</span>
+                  </div>
+                </div>
+                <div class="ghost-btn">开始考试</div>
+              </div>
+              <div class="list-card">
+                <div class="list-left">
+                  <div class="list-icon"></div>
+                  <div class="list-meta">
+                    <strong>新品知识考试</strong>
+                    <span>限时作答 · 正式结果</span>
+                  </div>
+                </div>
+                <div class="ghost-btn">开始考试</div>
+              </div>
+              <div class="list-card">
+                <div class="list-left">
+                  <div class="list-icon"></div>
+                  <div class="list-meta">
+                    <strong>环保等级考核</strong>
+                    <span>课程入口先选课，再进识别</span>
+                  </div>
+                </div>
+                <div class="ghost-btn">开始考试</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <strong>人脸识别验证</strong>
+            <span>来源：`pages/recognition/recognition.vue`</span>
+          </div>
+          <div class="phone">
+            <div class="screen">
+              <div class="verify-shell">
+                <div class="verify-card">
+                  <div class="face-wrap large">
+                    <div class="face-circle"></div>
+                  </div>
+                  <div class="verify-copy">您即将进行人脸识别验证</div>
+                  <div class="primary-btn">开始验证</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <strong>智能陪练进行中</strong>
+            <span>来源：`pages/coureEaxm/coureEaxm.vue`</span>
+          </div>
+          <div class="phone">
+            <div class="screen">
+              <div class="shell">
+                <div class="top-row">
+                  <div class="face-wrap">
+                    <div class="badge">表情识别中</div>
+                    <div class="face-circle"></div>
+                  </div>
+                  <div class="right-stack">
+                    <div class="progress-stack">
+                      <div class="progress-track">
+                        <div class="progress-fill" style="width: 25%"></div>
+                      </div>
+                      <div class="progress-text">进度：25.00%</div>
+                    </div>
+                    <div class="danger-btn">结束练习</div>
+                  </div>
+                </div>
+
+                <div class="chat-area">
+                  <div class="bubble-row left">
+                    <div class="bubble">1 .客户预算只有 18 万，但想儿童房更环保，你们 ENF 级为什么值得加钱？</div>
+                  </div>
+                  <div class="bubble-row right">
+                    <div class="bubble">我先确认一下，您更在意儿童房长期居住，还是总预算上限？</div>
+                  </div>
+                </div>
+
+                <div class="tip-card">
+                  <div class="tip-head">
+                    <strong>话术参考：环保等级解释</strong>
+                    <div class="send-chip">发送</div>
+                  </div>
+                  <div class="tip-body">1. 建议先复述客户顾虑，再解释环保释放量要求更严格，最后推进下一步。</div>
+                  <div class="textarea">请输入内容</div>
+                </div>
+
+                <div class="talk-wrap">
+                  <div class="talk-btn">按住说话</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <strong>智能考试进行中</strong>
+            <span>来源：`pages/examination/examination.vue`</span>
+          </div>
+          <div class="phone">
+            <div class="screen">
+              <div class="shell">
+                <div class="top-row">
+                  <div class="face-wrap">
+                    <div class="badge">表情识别中</div>
+                    <div class="face-circle"></div>
+                  </div>
+                  <div class="right-stack">
+                    <div class="timer">00:18:42</div>
+                    <div class="danger-btn">结束考试</div>
+                  </div>
+                </div>
+
+                <div class="chat-area">
+                  <div class="bubble-row left">
+                    <div class="bubble">1 .请用 60 秒向客户解释 E0 和 ENF 的区别。</div>
+                  </div>
+                  <div class="bubble-row right">
+                    <div class="bubble">两者都关注环保释放量，但 ENF 要求更严格，更适合儿童房和老人房场景。</div>
+                  </div>
+                </div>
+
+                <div class="tip-card">
+                  <div class="tip-head">
+                    <strong>话术参考：环保等级区别</strong>
+                    <div class="send-chip">发送</div>
+                  </div>
+                  <div class="tip-body">1. 先讲共同点，再讲 ENF 更严格，最后落到客户关心的家庭使用场景。</div>
+                  <div class="textarea">请输入内容</div>
+                </div>
+
+                <div class="talk-wrap">
+                  <div class="talk-btn">按住说话</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
