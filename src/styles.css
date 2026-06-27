@@ -7839,22 +7839,25 @@ h2 {
   background: var(--ui-surface-soft);
 }
 
-.space-mark.teal,
 .avatar-button,
 .profile-avatar {
   background: #0d0d0d;
 }
 
+.space-mark.teal {
+  background: #2f9e8f;
+}
+
 .space-mark.blue {
-  background: #4b4b53;
+  background: #4f6bd8;
 }
 
 .space-mark.amber {
-  background: #7a7a84;
+  background: #d98a3d;
 }
 
 .space-mark.violet {
-  background: #a6a6ae;
+  background: #8b5fbf;
 }
 
 .review-prompt,
@@ -7884,25 +7887,45 @@ h2 {
 }
 
 .workbench-page .compact-section .task-row:nth-of-type(1) svg,
-.workbench-page .compact-section .task-row:nth-of-type(2) svg,
-.workbench-page .compact-section .task-row:nth-of-type(3) svg,
 .module-grid button:nth-child(1) svg,
-.module-grid button:nth-child(2) svg,
-.module-grid button:nth-child(3) svg,
-.module-grid button:nth-child(4) svg,
-.resume-card.teal::before,
-.resume-card.blue::before,
-.resume-card.amber::before,
 .resume-card.muted::before {
-  color: #0d0d0d;
-  background: #0d0d0d;
+  color: #ffffff;
+  background: #4f6bd8;
 }
 
-.workbench-page .compact-section .task-row:nth-of-type(1) em,
-.workbench-page .compact-section .task-row:nth-of-type(2) em,
+.workbench-page .compact-section .task-row:nth-of-type(2) svg,
+.module-grid button:nth-child(2) svg,
+.resume-card.blue::before {
+  color: #ffffff;
+  background: #8b5fbf;
+}
+
+.workbench-page .compact-section .task-row:nth-of-type(3) svg,
+.module-grid button:nth-child(3) svg,
+.resume-card.amber::before {
+  color: #ffffff;
+  background: #d98a3d;
+}
+
+.module-grid button:nth-child(4) svg,
+.resume-card.teal::before {
+  color: #ffffff;
+  background: #2f9e8f;
+}
+
+.workbench-page .compact-section .task-row:nth-of-type(1) em {
+  color: #4f6bd8;
+  background: #eaedfb;
+}
+
+.workbench-page .compact-section .task-row:nth-of-type(2) em {
+  color: #8b5fbf;
+  background: #f1ebf8;
+}
+
 .workbench-page .compact-section .task-row:nth-of-type(3) em {
-  color: var(--ui-text-muted);
-  background: var(--ui-surface-muted);
+  color: #d98a3d;
+  background: #fbf0e3;
 }
 
 .space-list,
