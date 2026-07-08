@@ -1483,9 +1483,7 @@ export function App() {
 }
 
 function LoginScreen({ onLogin, onToast }) {
-  const [mode, setMode] = useState("password");
   const [baselineState, setBaselineState] = useState("missing");
-  const isPasswordMode = mode === "password";
 
   return (
     <div className="login-page">
@@ -1501,22 +1499,13 @@ function LoginScreen({ onLogin, onToast }) {
       </header>
 
       <section className="login-card">
-        <div className="login-mode">
-          <button className={isPasswordMode ? "active" : ""} onClick={() => setMode("password")}>
-            密码登录
-          </button>
-          <button className={!isPasswordMode ? "active" : ""} onClick={() => setMode("sms")}>
-            验证码登录
-          </button>
-        </div>
-
         <label className="login-field">
           <span>账号 / 手机号</span>
           <input defaultValue="13910000002" inputMode="tel" />
         </label>
         <label className="login-field">
-          <span>{isPasswordMode ? "密码" : "短信验证码"}</span>
-          <input defaultValue={isPasswordMode ? "Nxs@2026" : "0826"} type={isPasswordMode ? "password" : "text"} />
+          <span>密码</span>
+          <input defaultValue="Nxs@2026" type="password" />
         </label>
 
         <div className="login-row">
