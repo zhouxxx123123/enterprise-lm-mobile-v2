@@ -1120,6 +1120,10 @@ const tabForScreen = (screen, profileOriginTab = "企业LM") => {
 
 export function App() {
   const initialState = useMemo(() => getInitialPrototypeState(), []);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).get("auth") === "1";
+  });
   const [screen, setScreen] = useState(initialState.screen);
   const [filter, setFilter] = useState("全部");
   const [query, setQuery] = useState("");
@@ -1195,6 +1199,25 @@ export function App() {
 
     setScreen(nextScreen || "home");
   };
+
+  const loginToPrototype = () => {
+    setIsAuthenticated(true);
+    setProfileOpen(false);
+    setSourcePanel(false);
+    setToast("");
+    setScreen(initialState.screen);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <main className="app-shell">
+        <section className="phone-screen screen-login">
+          <LoginScreen onLogin={loginToPrototype} onToast={showToast} />
+          {toast && <div className="toast">{toast}</div>}
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="app-shell">
@@ -1443,6 +1466,12 @@ export function App() {
             onOpenMaterials={() => openProfileScreen("profile-materials")}
             onOpenDownloads={() => openProfileScreen("profile-downloads")}
             onOpenMessages={() => openProfileScreen("profile-messages")}
+            onLogout={() => {
+              setProfileOpen(false);
+              setSourcePanel(false);
+              setIsAuthenticated(false);
+              setScreen(initialState.screen);
+            }}
             onToast={showToast}
           />
         )}
@@ -1450,6 +1479,94 @@ export function App() {
         {toast && <div className="toast">{toast}</div>}
       </section>
     </main>
+  );
+}
+
+function LoginScreen({ onLogin, onToast }) {
+  const [mode, setMode] = useState("password");
+  const [baselineState, setBaselineState] = useState("missing");
+  const isPasswordMode = mode === "password";
+
+  return (
+    <div className="login-page">
+      <header className="login-hero">
+        <div className="tenant-chip">
+          <DeviceMobile size={16} />
+          <span>华东一区 · 杭州旗舰店</span>
+        </div>
+        <div>
+          <p className="eyebrow">内训师员工端</p>
+          <h1>企业LM</h1>
+        </div>
+      </header>
+
+      <section className="login-card">
+        <div className="login-mode">
+          <button className={isPasswordMode ? "active" : ""} onClick={() => setMode("password")}>
+            密码登录
+          </button>
+          <button className={!isPasswordMode ? "active" : ""} onClick={() => setMode("sms")}>
+            验证码登录
+          </button>
+        </div>
+
+        <label className="login-field">
+          <span>账号 / 手机号</span>
+          <input defaultValue="13910000002" inputMode="tel" />
+        </label>
+        <label className="login-field">
+          <span>{isPasswordMode ? "密码" : "短信验证码"}</span>
+          <input defaultValue={isPasswordMode ? "Nxs@2026" : "0826"} type={isPasswordMode ? "password" : "text"} />
+        </label>
+
+        <div className="login-row">
+          <label>
+            <input type="checkbox" defaultChecked />
+            <span>保持登录</span>
+          </label>
+          <button onClick={() => onToast("进入找回 / 重置密码流程")}>忘记密码</button>
+        </div>
+
+        <button className="login-primary" onClick={onLogin}>
+          登录
+          <ArrowUp size={22} weight="bold" />
+        </button>
+      </section>
+
+      <section className="activation-card">
+        <div className="activation-head">
+          <div className="activation-mark">
+            <UserCircle size={22} weight="fill" />
+          </div>
+          <div>
+            <strong>首次登录</strong>
+            <span>激活账号后进入移动端</span>
+          </div>
+        </div>
+        <div className="activation-steps">
+          <button onClick={() => onToast("校验手机号与员工档案")}>
+            <CheckCircle size={18} />
+            <span>身份校验</span>
+          </button>
+          <button onClick={() => onToast("设置登录密码")}>
+            <CheckCircle size={18} />
+            <span>设置密码</span>
+          </button>
+          <button
+            className={baselineState === "ready" ? "ready" : ""}
+            onClick={() => setBaselineState(baselineState === "ready" ? "missing" : "ready")}
+          >
+            <ShieldCheck size={18} />
+            <span>{baselineState === "ready" ? "人脸基准照已完成" : "采集人脸基准照"}</span>
+          </button>
+        </div>
+      </section>
+
+      <footer className="login-footer">
+        <button onClick={() => onToast("企业微信 / 钉钉单点登录作为后续扩展")}>企业身份登录</button>
+        <span>会话过期后返回本页重新认证</span>
+      </footer>
+    </div>
   );
 }
 
@@ -3612,7 +3729,7 @@ function ProfileMessagesScreen({ onBack, onToast, onNavigate }) {
   );
 }
 
-function ProfileDrawer({ onClose, onOpenAssets, onOpenReviews, onOpenMaterials, onOpenDownloads, onOpenMessages, onToast }) {
+function ProfileDrawer({ onClose, onOpenAssets, onOpenReviews, onOpenMaterials, onOpenDownloads, onOpenMessages, onLogout, onToast }) {
   return (
     <div className="drawer-backdrop" onClick={onClose}>
       <aside className="profile-drawer" onClick={(event) => event.stopPropagation()}>
@@ -3658,7 +3775,7 @@ function ProfileDrawer({ onClose, onOpenAssets, onOpenReviews, onOpenMaterials, 
         <button className="drawer-row" onClick={onOpenDownloads}><Files size={22} />下载管理<CaretRight size={18} /></button>
         <button className="drawer-row" onClick={onOpenMessages}><Info size={22} />消息<CaretRight size={18} /></button>
         <button className="drawer-row" onClick={() => onToast("设置下一轮再细化")}><NotePencil size={22} />设置<CaretRight size={18} /></button>
-        <button className="drawer-row danger"><SignOut size={22} />退出登录</button>
+        <button className="drawer-row danger" onClick={onLogout}><SignOut size={22} />退出登录</button>
       </aside>
     </div>
   );

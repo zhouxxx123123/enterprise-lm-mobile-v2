@@ -58,6 +58,228 @@ body {
   box-shadow: 0 28px 80px rgba(24, 24, 24, 0.18);
 }
 
+.login-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px 22px;
+  background: #ffffff;
+}
+
+.login-hero {
+  display: grid;
+  gap: 58px;
+  padding: 2px 2px 0;
+}
+
+.login-hero h1 {
+  margin-top: 5px;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.tenant-chip {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  color: #555555;
+  background: #f8f8f8;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.login-card {
+  display: grid;
+  gap: 13px;
+  margin-top: 30px;
+  padding: 16px;
+  border: 1px solid #eeeeee;
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(13, 13, 13, 0.07);
+}
+
+.login-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 4px;
+  border-radius: 17px;
+  background: #f2f2f2;
+}
+
+.login-mode button {
+  min-height: 38px;
+  border-radius: 13px;
+  color: #717171;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 720;
+}
+
+.login-mode button.active {
+  color: #111111;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(13, 13, 13, 0.08);
+}
+
+.login-field {
+  display: grid;
+  gap: 7px;
+}
+
+.login-field span {
+  color: #757575;
+  font-size: 12px;
+  font-weight: 680;
+}
+
+.login-field input {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid #e7e7e7;
+  border-radius: 18px;
+  outline: none;
+  color: #171717;
+  background: #fbfbfb;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+  color: #777777;
+  font-size: 12px;
+}
+
+.login-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-row input {
+  width: 15px;
+  height: 15px;
+  accent-color: #111111;
+}
+
+.login-row button {
+  color: #181818;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 720;
+}
+
+.login-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 54px;
+  border-radius: 19px;
+  color: #ffffff;
+  background: #0d0d0d;
+  font-size: 17px;
+  font-weight: 780;
+}
+
+.activation-card {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid #eeeeee;
+  border-radius: 24px;
+  background: #f8f8f8;
+}
+
+.activation-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.activation-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: #ffffff;
+  background: #4f6bd8;
+}
+
+.activation-head div:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.activation-head strong {
+  color: #171717;
+  font-size: 16px;
+}
+
+.activation-head span {
+  color: #767676;
+  font-size: 12px;
+}
+
+.activation-steps {
+  display: grid;
+  gap: 8px;
+}
+
+.activation-steps button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  color: #252525;
+  background: #ffffff;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.activation-steps button.ready {
+  border-color: #dfe8ff;
+  color: #324eb4;
+  background: #eef2ff;
+}
+
+.login-footer {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 18px;
+  text-align: center;
+}
+
+.login-footer button {
+  color: #181818;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 740;
+}
+
+.login-footer span {
+  color: #8a8a8a;
+  font-size: 12px;
+}
+
 .page,
 .chat-page {
   height: 100%;
